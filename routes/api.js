@@ -37,6 +37,12 @@ router.get('/location/:loc_id', async function (req, res) {
 
 // region Posts
 router.post('/review', async function (req, res) {
+    let result = await review.addReview(req.body)
+    if (result) {
+        res.send(result)
+    } else {
+        res.send({error: 'Something went wrong.'})
+    }
 })
 
 // router.post('/restaurant', async function (req, res) {})

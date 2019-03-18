@@ -41,4 +41,25 @@ exports.getReviewByID = async function(id) {
 // endregion
 
 // region Setters
+exports.getReviewByID = async function(body) {
+    let rest_id = body.restaurant
+    let author = body.author
+    let rating = body.rating
+    let title = body.title
+    let rev_body = body.body
+    let created = new Date()
+
+    let stmnt = db.prepare('INSERT INTO Reviews(restaurant, author, rating, title, body, created) VALUES (?, ?, ?, ?, ?, ?)')
+
+    let info
+    try {
+        info = stmnt.run(rest_id, author, rating, title, rev_body, created)
+    } catch (e) {
+        console.log(e.stack)
+        return null
+    }
+
+    return info
+}
+
 // endregion
